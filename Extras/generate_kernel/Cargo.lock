@@ -1,0 +1,4 @@
+[root]
+name = "generate_kernel"
+version = "0.1.0"
+
