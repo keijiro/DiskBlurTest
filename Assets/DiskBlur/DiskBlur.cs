@@ -2,7 +2,7 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(Camera))]
-public class DiscBlur : MonoBehaviour
+public class DiskBlur : MonoBehaviour
 {
     [SerializeField] float _scale = 1;
 
@@ -14,7 +14,7 @@ public class DiscBlur : MonoBehaviour
     {
         if (_material == null)
         {
-            _material = new Material(Shader.Find("Hidden/DiscBlur"));
+            _material = new Material(Shader.Find("Hidden/DiskBlur"));
             _material.hideFlags = HideFlags.HideAndDontSave;
         }
     }

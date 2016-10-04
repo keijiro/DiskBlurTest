@@ -1,4 +1,4 @@
-Shader "Hidden/DiscBlur"
+Shader "Hidden/DiskBlur"
 {
     Properties
     {
@@ -20,7 +20,7 @@ Shader "Hidden/DiscBlur"
         {
             ZTest Always Cull Off ZWrite Off
             CGPROGRAM
-            #include "DiscBlur.cginc"
+            #include "DiskBlur.cginc"
             #pragma vertex vert_img
             #pragma fragment frag_blur
             #pragma target 3.0
