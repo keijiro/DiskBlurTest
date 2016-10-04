@@ -4,7 +4,7 @@
 sampler2D _MainTex;
 float4 _MainTex_TexelSize;
 
-float _Scale;
+float2 _SampleInterval;
 
 half4 frag_blur(v2f_img i) : SV_Target
 {
@@ -12,7 +12,7 @@ half4 frag_blur(v2f_img i) : SV_Target
 
     for (int s = 0; s < kSampleCount; s++)
     {
-        float2 duv = kDiskKernel[s] * _MainTex_TexelSize.xy * _Scale;
+        float2 duv = kDiskKernel[s] * _SampleInterval;
         acc += tex2D(_MainTex, i.uv + duv).rgb;
     }
 
