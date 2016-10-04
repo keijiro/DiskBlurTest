@@ -6,9 +6,9 @@ Shader "Hidden/DiskBlur"
     }
     SubShader
     {
+        ZTest Always Cull Off ZWrite Off
         Pass
         {
-            ZTest Always Cull Off ZWrite Off
             CGPROGRAM
             #include "Downsample.cginc"
             #pragma vertex vert_img
@@ -18,8 +18,38 @@ Shader "Hidden/DiskBlur"
         }
         Pass
         {
-            ZTest Always Cull Off ZWrite Off
             CGPROGRAM
+            #define SAMPLE_COUNT_LOW
+            #include "DiskBlur.cginc"
+            #pragma vertex vert_img
+            #pragma fragment frag_blur
+            #pragma target 3.0
+            ENDCG
+        }
+        Pass
+        {
+            CGPROGRAM
+            #define SAMPLE_COUNT_MEDIUM
+            #include "DiskBlur.cginc"
+            #pragma vertex vert_img
+            #pragma fragment frag_blur
+            #pragma target 3.0
+            ENDCG
+        }
+        Pass
+        {
+            CGPROGRAM
+            #define SAMPLE_COUNT_HIGH
+            #include "DiskBlur.cginc"
+            #pragma vertex vert_img
+            #pragma fragment frag_blur
+            #pragma target 3.0
+            ENDCG
+        }
+        Pass
+        {
+            CGPROGRAM
+            #define SAMPLE_COUNT_VERYHIGH
             #include "DiskBlur.cginc"
             #pragma vertex vert_img
             #pragma fragment frag_blur

@@ -4,6 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class DiskBlur : MonoBehaviour
 {
+    public enum SampleCount { Low, Medium, High, VeryHigh }
+
+    [SerializeField] SampleCount _sampleCount = SampleCount.Medium;
     [SerializeField] float _scale = 1;
 
     [SerializeField, HideInInspector] Shader _shader;
@@ -43,7 +46,7 @@ public class DiskBlur : MonoBehaviour
         Graphics.Blit(source, rt1, _material, 0);
 
         _material.SetFloat("_Scale", _scale);
-        Graphics.Blit(rt1, rt2, _material, 1);
+        Graphics.Blit(rt1, rt2, _material, 1 + (int)_sampleCount);
 
         Graphics.Blit(rt2, destination);
 
