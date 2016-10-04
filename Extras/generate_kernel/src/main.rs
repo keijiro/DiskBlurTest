@@ -1,16 +1,23 @@
+use std::env;
 use std::f32::{self, consts};
 
-fn sigma(x : i32) -> i32 {
-    if x == 0 { 0 } else { x + sigma(x - 1) }
-}
-
 fn main() {
-    let rings = 5;
-    let points_per_ring = 7;
-    let total_points = sigma(rings - 1) * points_per_ring;
+    let mut args = env::args();
+    let arg1 = args.nth(1).unwrap_or(String::new()).parse::<u32>();
+    let arg2 = args.nth(0).unwrap_or(String::new()).parse::<u32>();
 
-    println!("static const int sampleCount = {};", total_points + 1);
-    println!("static const float2 kernel[sampleCount] = {{");
+    if arg1.is_err() || arg2.is_err() {
+        println!("Usage: generate_kernel number_of_rings points_per_ring");
+        return;
+    }
+
+    let rings = arg1.unwrap();
+    let points_per_ring = arg2.unwrap();
+
+    let total_points = (0..rings).fold(0, |acc, i| acc + i) * points_per_ring;
+
+    println!("static const int kSampleCount = {};", total_points + 1);
+    println!("static const float2 kDiskKernel[kSampleCount] = {{");
     println!("    float2(0,0),");
 
     for ring in 1..rings {
