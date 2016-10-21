@@ -14,13 +14,13 @@ fn main() {
     let rings = arg1.unwrap();
     let points_per_ring = arg2.unwrap();
 
-    let total_points = (0..rings).fold(0, |acc, i| acc + i) * points_per_ring;
+    let total_points = (0..(rings + 1)).fold(0, |acc, i| acc + i) * points_per_ring;
 
     println!("static const int kSampleCount = {};", total_points + 1);
     println!("static const float2 kDiskKernel[kSampleCount] = {{");
     println!("    float2(0,0),");
 
-    for ring in 1..rings {
+    for ring in 1..(rings + 1) {
         let bias = 1.0 / (points_per_ring as f32);
         let radius = ((ring as f32) + bias) / ((rings as f32) + bias);
         let points = ring * points_per_ring;
