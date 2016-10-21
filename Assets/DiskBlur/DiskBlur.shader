@@ -28,7 +28,7 @@ Shader "Hidden/DiskBlur"
         Pass
         {
             CGPROGRAM
-            #define SAMPLE_COUNT_LOW
+            #define KERNEL_SMALL
             #include "DiskBlur.cginc"
             #pragma vertex vert_img
             #pragma fragment frag_blur
@@ -38,7 +38,7 @@ Shader "Hidden/DiskBlur"
         Pass
         {
             CGPROGRAM
-            #define SAMPLE_COUNT_MEDIUM
+            #define KERNEL_MEDIUM
             #include "DiskBlur.cginc"
             #pragma vertex vert_img
             #pragma fragment frag_blur
@@ -48,7 +48,7 @@ Shader "Hidden/DiskBlur"
         Pass
         {
             CGPROGRAM
-            #define SAMPLE_COUNT_HIGH
+            #define KERNEL_LARGE
             #include "DiskBlur.cginc"
             #pragma vertex vert_img
             #pragma fragment frag_blur
@@ -58,7 +58,7 @@ Shader "Hidden/DiskBlur"
         Pass
         {
             CGPROGRAM
-            #define SAMPLE_COUNT_VERYHIGH
+            #define KERNEL_VERYLARGE
             #include "DiskBlur.cginc"
             #pragma vertex vert_img
             #pragma fragment frag_blur

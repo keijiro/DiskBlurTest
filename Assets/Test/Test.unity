@@ -561,6 +561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1902bba305c3ef4ebb19f8d7589f357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sampleCount: 1
-  _radius: 12
+  _sampleCount: 3
+  _radius: 19.4
   _shader: {fileID: 4800000, guid: b14387c423331f44fb48fe30c224dcae, type: 3}
