@@ -562,5 +562,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sampleCount: 1
-  _scale: 2
+  _radius: 12
   _shader: {fileID: 4800000, guid: b14387c423331f44fb48fe30c224dcae, type: 3}

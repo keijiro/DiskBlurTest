@@ -10,9 +10,18 @@ Shader "Hidden/DiskBlur"
         Pass
         {
             CGPROGRAM
-            #include "Downsample.cginc"
+            #include "Resample.cginc"
             #pragma vertex vert_img
             #pragma fragment frag_downsample
+            #pragma target 3.0
+            ENDCG
+        }
+        Pass
+        {
+            CGPROGRAM
+            #include "Resample.cginc"
+            #pragma vertex vert_img
+            #pragma fragment frag_upsample
             #pragma target 3.0
             ENDCG
         }

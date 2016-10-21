@@ -7,7 +7,7 @@ public class DiskBlur : MonoBehaviour
     public enum SampleCount { Low, Medium, High, VeryHigh }
 
     [SerializeField] SampleCount _sampleCount = SampleCount.Medium;
-    [SerializeField] float _scale = 1;
+    [SerializeField] float _radius = 1;
 
     [SerializeField, HideInInspector] Shader _shader;
 
@@ -37,15 +37,18 @@ public class DiskBlur : MonoBehaviour
         var height = source.height;
         var format = source.format;
 
+        var vscale = _radius / height;
+        var hscale = vscale * height / width;
+
         var rt1 = RenderTexture.GetTemporary(width / 2, height / 2, 0, format);
         var rt2 = RenderTexture.GetTemporary(width / 2, height / 2, 0, format);
 
         Graphics.Blit(source, rt1, _material, 0);
 
-        _material.SetVector("_SampleInterval", new Vector2((float)height / width, 1) * (_scale / 100));
-        Graphics.Blit(rt1, rt2, _material, 1 + (int)_sampleCount);
+        _material.SetVector("_SampleInterval", new Vector2(hscale, vscale));
+        Graphics.Blit(rt1, rt2, _material, 2 + (int)_sampleCount);
 
-        Graphics.Blit(rt2, destination);
+        Graphics.Blit(rt2, destination, _material, 1);
 
         RenderTexture.ReleaseTemporary(rt1);
         RenderTexture.ReleaseTemporary(rt2);
